@@ -1,6 +1,6 @@
 <h1>Trivia Game</h1>
 
-<div *ngIf="question.length > 0 && continue == true">
+<div *ngIf="question.length > 0 && promptQuestion == true">
   <p>{{ question[0].question }}</p>
   <div *ngFor="let choice of choices">
     <input type="radio" name="answer" [(ngModel)]="selectedChoice" value="{{ choice }}">
@@ -9,12 +9,14 @@
     <button (click)="submitAnswers()">Submit Answers</button>
 </div>
 
-<div *ngIf="!continue">
-  <div *ngIf="correctAnswer">
+<div *ngIf="!promptQuestion">
+  <div *ngIf="correctAnswerGiven">
     <p>Correct! Click the button to continue.</p>
-    <button (click)="refreshQuestion()">Next Question</button>
+    <div *ngIf="questionTotal == 4"><p>You've made it past 4 questions! Increasing the difficulty now...</p></div>
+    <div *ngIf="questionTotal == 8"><p>You've made it past 8 questions! Increasing the difficulty again...</p></div>
+    <button (click)="continueTrivia()">Next Question</button>
   </div>
-  <div *ngIf="!correctAnswer">
+  <div *ngIf="!correctAnswerGiven">
     <p>Incorrect! the correct answer was: {{question[0].correct_answer }}</p>
     <p>Please click the button to try again.</p>
     <button (click)="restartTrivia()">Restart</button>
@@ -25,6 +27,4 @@
   <p>questions not found</p>
 </div> -->
 
-
-<p> Total Count: {{ totalCount }}</p>
-<p> Correct Count: {{ correctCount }}</p>
+<p>Questions anwsered: {{ questionTotal }} / 10</p>
