@@ -1,13 +1,13 @@
 <main>
   <div class="card">
-    <h1>Trivia Game</h1>
+    <h1>Max's Trivia Game</h1>
     <div *ngIf="question.length > 0 && promptQuestion == true">
-      <p>{{ question[0].question | json }}</p>
+      <p>{{ question[0].question}}</p>
       <div *ngFor="let choice of choices">
         <input type="radio" name="answer" [(ngModel)]="selectedChoice" value="{{ choice }}">
         <label> {{ choice }}</label>
       </div>
-      <button (click)="submitAnswers()">Submit Answers</button>
+      <button (click)="submitAnswers()">Submit Answer</button>
     </div>
 
     <div *ngIf="!promptQuestion && !gameWon">
