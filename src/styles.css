@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-image: repeating-linear-gradient(
+    90deg,
+    #f8f8f8 0,
+    #f8f8f8 100px,
+    #e0e0e0 100px,
+    #e0e0e0 200px,
+    #afdfff 200px,
+    #afdfff 300px,
+    #e0e0e0 300px,
+    #e0e0e0 400px
+    );
+}

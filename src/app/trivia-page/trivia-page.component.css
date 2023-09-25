@@ -1,0 +1,61 @@
+.card {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    padding: 50px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+html, body {
+    background: #000000;
+}
+
+h1 {
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 40px;
+    color: #000000;
+}
+
+p{
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    color: #000000;
+}
+
+button {
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    margin: 4px 2px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1a6eec;
+    color: #ffffff;
+}
+
+input[type=radio] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    color: #000000;
+}

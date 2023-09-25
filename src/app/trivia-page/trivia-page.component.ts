@@ -17,25 +17,27 @@ export class TriviaPageComponent implements OnInit {
   questionTotal = 0;
   promptQuestion = true; // When true, a question is displayed. When false, the answer is displayed.
   correctAnswerGiven = true; // Decides which screen is shown when an answer is submitted. 
+  gameWon = false; // Decides which screen is shown when the game is won.
 
   difficulty = "easy";
 
 
   constructor(private triviaService: TriviaService) { }
+  
 
+  // Pulls a question from the API when the page is loaded
   ngOnInit(): void {
     this.refreshQuestion();
   }
 
+  // Pulls a new question from the API
   refreshQuestion(): void {
-    // Pulls a new question from the API
-    
     this.triviaService.getQuestions('9', this.difficulty).subscribe(data => {
       console.log(this.difficulty);
       this.question = data.results;
 
-      // Jumbles up the correct answer and the incorrect answers
-      // (if multiple choice)
+      // Defines the choices for the question
+      // (if multiple choice, jumbles the answers)
       if (this.question[0].type == "boolean") {
         this.choices = ["True", "False"];
       }
@@ -44,10 +46,11 @@ export class TriviaPageComponent implements OnInit {
         this.choices.splice(Math.floor(Math.random() * (this.choices.length + 1)), 0, this.question[0].correct_answer);
       }
     });
-    console.log(this.question);
+    // console.log(this.question);
     this.promptQuestion = true;
   }
 
+  // Checks if the answer is correct and changes difficulty if necessary
   submitAnswers(): void {
     if (this.selectedChoice == this.question[0].correct_answer) {
       this.correctAnswerGiven = true;
@@ -57,23 +60,31 @@ export class TriviaPageComponent implements OnInit {
     }
 
     this.questionTotal++;
-    this.promptQuestion = false;
-  }
-
-  continueTrivia(): void {
     if (this.questionTotal == 4) {
       this.difficulty = "medium";
     }
     else if (this.questionTotal == 8) {
       this.difficulty = "hard";
     }
+    else if (this.questionTotal == 10) {
+      this.promptQuestion = false;
+      this.gameWon = true;
+    }
+    this.promptQuestion = false;
+  }
+
+  // Resets the page to display a new question
+  // (Not really necessary rn, but can build on in the future)
+  continueTrivia(): void {
     this.refreshQuestion();
   }
 
+  // Resets all variables to their default values and brings a new question
   restartTrivia(): void {
     this.questionTotal = 0;
     this.question = [];
     this.difficulty = "easy";
+    this.gameWon = false;
     this.refreshQuestion();
   }
 }

@@ -1,30 +1,38 @@
-<h1>Trivia Game</h1>
-
-<div *ngIf="question.length > 0 && promptQuestion == true">
-  <p>{{ question[0].question }}</p>
-  <div *ngFor="let choice of choices">
-    <input type="radio" name="answer" [(ngModel)]="selectedChoice" value="{{ choice }}">
-    <label>{{ choice }}</label>
+<main>
+  <div class="card">
+    <h1>Trivia Game</h1>
+    <div *ngIf="question.length > 0 && promptQuestion == true">
+      <p>{{ question[0].question | json }}</p>
+      <div *ngFor="let choice of choices">
+        <input type="radio" name="answer" [(ngModel)]="selectedChoice" value="{{ choice }}">
+        <label> {{ choice }}</label>
+      </div>
+      <button (click)="submitAnswers()">Submit Answers</button>
     </div>
-    <button (click)="submitAnswers()">Submit Answers</button>
-</div>
 
-<div *ngIf="!promptQuestion">
-  <div *ngIf="correctAnswerGiven">
-    <p>Correct! Click the button to continue.</p>
-    <div *ngIf="questionTotal == 4"><p>You've made it past 4 questions! Increasing the difficulty now...</p></div>
-    <div *ngIf="questionTotal == 8"><p>You've made it past 8 questions! Increasing the difficulty again...</p></div>
-    <button (click)="continueTrivia()">Next Question</button>
-  </div>
-  <div *ngIf="!correctAnswerGiven">
-    <p>Incorrect! the correct answer was: {{question[0].correct_answer }}</p>
-    <p>Please click the button to try again.</p>
-    <button (click)="restartTrivia()">Restart</button>
-  </div>
-</div>
+    <div *ngIf="!promptQuestion && !gameWon">
+      <div *ngIf="correctAnswerGiven">
+        <p>Correct! Click the button to continue.</p>
+        <div *ngIf="questionTotal == 4"><p>You've made it past 4 questions! Increasing the difficulty now...</p></div>
+        <div *ngIf="questionTotal == 8"><p>You've made it past 8 questions! Increasing the difficulty again...</p></div>
+        <button (click)="continueTrivia()">Next Question</button>
+      </div>
+      <div *ngIf="!correctAnswerGiven">
+        <p>Incorrect! the correct answer was: {{question[0].correct_answer }}</p>
+        <p>Please click the button to try again.</p>
+        <button (click)="restartTrivia()">Restart</button>
+      </div>
+    </div>
+
+    <div *ngIf="gameWon">
+      <p>Congratulations! You've won the game!</p>
+      <button (click)="restartTrivia()">Play Again</button>
+    </div>
 
 <!-- <div *ngIf="question.length == 0">
   <p>questions not found</p>
 </div> -->
 
-<p>Questions anwsered: {{ questionTotal }} / 10</p>
+    <p>Questions anwsered: {{ questionTotal }} / 10</p>
+  </div>
+</main>

@@ -30,9 +30,9 @@ export class TriviaService {
     if (type) {
       url += `&type=${type}`;
     }
-    // else {
-    //   url += `&type=multiple`;
-    // }
+    else {
+      url += `&type=multiple`;
+    }
 
     console.log(url);
 
